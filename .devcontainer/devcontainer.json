@@ -1,0 +1,112 @@
+{
+  "name": "Personal Playground - Cloud Development",
+  "image": "mcr.microsoft.com/devcontainers/universal:2-ubuntu-22.04",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/aws-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/gcloud:1": {
+      "version": "latest",
+      "installGcloudAlpha": true,
+      "installGcloudBeta": true
+    },
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "version": "latest",
+      "helm": "latest",
+      "minikube": "none"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "enableNonRootDocker": "true"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    }
+  },
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "HashiCorp.terraform",
+        "HashiCorp.hcl",
+        "amazonwebservices.aws-toolkit-vscode",
+        "amazonwebservices.codewhisperer-for-command-line-companion",
+        "GoogleCloudTools.cloudcode",
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "ms-vscode.powershell",
+        "ms-python.python",
+        "ms-python.pylint",
+        "ms-toolsai.jupyter",
+        "GitHub.vscode-pull-request-github",
+        "eamodio.gitlens",
+        "ms-azuretools.vscode-docker",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        },
+        "files.associations": {
+          "*.tf": "terraform",
+          "*.tfvars": "terraform",
+          "*.hcl": "terraform"
+        },
+        "terraform.languageServer": {
+          "enabled": true,
+          "args": []
+        },
+        "github.copilot.enable": {
+          "*": true,
+          "yaml": true,
+          "plaintext": false,
+          "markdown": true,
+          "terraform": true,
+          "json": true,
+          "python": true,
+          "javascript": true,
+          "typescript": true
+        },
+        "editor.suggestSelection": "first",
+        "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+        "editor.tabCompletion": "on",
+        "editor.wordBasedSuggestions": "off"
+      }
+    }
+  },
+  
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  
+  "remoteUser": "codespace",
+  
+  "forwardPorts": [3000, 8080, 8000],
+  
+  "portsAttributes": {
+    "3000": {
+      "label": "Development Server",
+      "onAutoForward": "notify"
+    },
+    "8080": {
+      "label": "HTTP Server",
+      "onAutoForward": "notify"
+    },
+    "8000": {
+      "label": "Alternative Server",
+      "onAutoForward": "notify"
+    }
+  }
+}
